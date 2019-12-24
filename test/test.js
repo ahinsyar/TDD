@@ -1,11 +1,11 @@
-var assert = require('assert');
-describe('Array', () => {
-    describe('#indexOf()', () =>{
-        it('should return -1 when the value is not present', () => {
-            assert.equal([1, 2, 3].indexOf(4), -1);
-        });
-    });
-});
+// var assert = require('assert');
+// describe('Array', () => {
+//     describe('#indexOf()', () =>{
+//         it('should return -1 when the value is not present', () => {
+//             assert.equal([1, 2, 3].indexOf(4), -1);
+//         });
+//     });
+// });
 
 // it('double done', function(done){
 //     setImmediate(done);
@@ -131,27 +131,64 @@ describe('Array', () => {
 // })
 
 //skip을 이용하여 테스트를 건너뛸수 있다.
+//skip을 주석 처리 대신 사용 하면 좋다.
 //건너뛴 테스트는 pending으로 표시 된다.
-describe('Array', function(){
-    describe('#indexOf()', function(){
-        it.skip('should return -1 unless present', function(){
+// describe('Array', function(){
+//     describe('#indexOf()', function(){
+//         it.skip('should return -1 unless present', function(){
 
-        })
-        it('should return the index when present', function(){
+//         })
+//         it('should return the index when present', function(){
 
+//         })
+//     })
+// })
+// //전체 스위트에 skip을 넣어 건너뛸 수 있다.
+// describe('Array', function(){
+//     describe.skip('#indexOf()', function(){
+//         it('should return -1 unless present', function(){
+
+//         })
+//         it('should return the index when present', function(){
+
+//         })
+//     })
+// })
+
+//retries를 이용하여 테스트를 여러번 수행 할 수 있다.
+//단, 단위테스트에서는 사용하면 안된다.
+//before/after는 재 수행 하지 않고 beforeEach/afterEach에서만 재 수행 한다.
+// describe('retries', function(){
+//     this.retries(4);
+//     beforeEach(function(){
+//         browser.get('http://www.yahoo.com');
+//     })
+//     it('should succeed on the 3rd try', function(){
+//         this.retries(2);
+//         expect($('.foo').isDisplayed()).to.eventually.be.true;
+//     })
+// })
+
+//동적 테스트 생성
+var assert = require('chai').assert;
+
+function add(){
+    return Array.prototype.slice.call(arguments).reduce(function(prev, curr){
+        return prev + curr;
+    }, 0)
+}
+
+describe('add()', function(){
+    var tests = [
+        {args:[1, 2], expected: 3},
+        {args:[1, 2, 3], expected: 6},
+        {args:[1, 2, 3, 4], expected:10}
+    ];
+
+    tests.forEach(function(test){
+        it('correctly adds ' + test.args.length + ' args', function(){
+            var res = add.apply(null, test.args);
+            assert.equal(res, test.expected);
         })
     })
 })
-//전체 스위트에 skip을 넣어 건너뛸 수 있다.
-describe('Array', function(){
-    describe.skip('#indexOf()', function(){
-        it('should return -1 unless present', function(){
-
-        })
-        it('should return the index when present', function(){
-
-        })
-    })
-})
-
-
