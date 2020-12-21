@@ -38,7 +38,9 @@ const app = express();
 // app.use(logger2);
 // app.use(morgan('dev'))
 
-app.use(morgan('dev'))
+if(process.env.NODE_ENV !== 'test'){
+    app.use(morgan('dev'))
+}
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use('/users', user)
@@ -106,8 +108,8 @@ app.use('/users', user)
 //     res.json(user);
 // })
 
-app.listen(3000, function(){
-    console.log('server is running')
-})
+// app.listen(3000, function(){
+//     console.log('server is running')
+// })
 
 module.exports = app;
