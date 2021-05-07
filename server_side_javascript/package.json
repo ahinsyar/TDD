@@ -12,6 +12,6 @@
     "express": "^4.17.1",
     "jade": "^1.11.0",
     "swal": "^0.1.0",
-    "underscore": "^1.9.2"
+    "underscore": "^1.12.1"
   }
 }
